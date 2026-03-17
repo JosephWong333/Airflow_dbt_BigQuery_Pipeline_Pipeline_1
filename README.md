@@ -1,47 +1,27 @@
-# End-to-End Data Engineering Pipeline
-### Airflow · dbt · BigQuery · Soda
+Data Engineering Pipeline — Airflow, dbt, Soda & BigQuery
+An end-to-end data engineering project that loads retail data into BigQuery, applies transformations with dbt, and validates data quality using Soda — all orchestrated through Apache Airflow.
 
-A containerized ELT pipeline that ingests retail data into BigQuery, transforms it into analytics-ready models using dbt, and validates data quality with Soda — all orchestrated through Apache Airflow.
+Project Structure
+PathPurposedags/Airflow DAGs — includes the retail DAG covering ingestion through visualizationinclude/Supporting project filesplugins/Custom or community Airflow pluginsDockerfileVersioned Astro Runtime imagepackages.txtOS-level dependenciesrequirements.txtPython dependenciesairflow_settings.yamlLocal Airflow connections, variables, and pools
 
----
+Running Locally
+1. Start the project
+bashastro dev start
+This spins up 4 Docker containers:
 
-## Project Overview
-This project demonstrates a full modern data stack:
+Postgres — Airflow metadata database
+Webserver — Airflow UI
+Scheduler — monitors and triggers tasks
+Triggerer — handles deferred tasks
 
-| Tool | Role |
-|------|------|
-| **Airflow** | Orchestrates the pipeline with task dependencies and retry logic |
-| **dbt** | Transforms raw landing zone data into dimension and fact tables |
-| **Soda** | Runs automated data quality checks to catch schema issues and null propagation |
-| **BigQuery** | Serves as the cloud data warehouse |
-| **Docker** | Containerizes the entire workflow for reproducibility |
+2. Confirm containers are running
+bashdocker ps
+3. Open the Airflow UI
+Navigate to http://localhost:8080 and log in with admin / admin.
 
----
+Postgres is available at localhost:5432/postgres. If ports 8080 or 5432 are already in use, stop the conflicting containers or update the port configuration.
 
-## Project Structure
-```
-├── dags/                  # Airflow DAGs (retail pipeline)
-├── include/               # Supporting files and dbt models
-├── Dockerfile             # Astro Runtime image
-├── requirements.txt       # Python dependencies
-└── airflow_settings.yaml  # Local Airflow connections and variables
-```
 
----
-
-## Running Locally
-
-1. Install the [Astronomer CLI](https://docs.astronomer.io/astro/cli/install-cli)
-2. Start the project:
-```bash
-astro dev start
-```
-3. Access the Airflow UI at `http://localhost:8080` (user: `admin`, password: `admin`)
-4. Trigger the `retail` DAG and monitor task execution
-
----
-
-## Requirements
-- Docker Desktop
-- Astronomer CLI
-- Google Cloud account with BigQuery enabled
+Deploying to Astronomer
+Push to a cloud deployment with:
+bashastro deploy
