@@ -1,4 +1,4 @@
-# Data Engineering Pipeline — Airflow, dbt, Soda & BigQuery
+# Data Engineering Pipeline (Airflow, dbt, Soda & BigQuery)
 
 An end-to-end data engineering project that loads retail data into BigQuery, applies transformations with dbt, and validates data quality using Soda — all orchestrated through Apache Airflow.
 
@@ -50,4 +50,3 @@ Navigate to [http://localhost:8080](http://localhost:8080) and log in with `admi
 astro deploy
 ```
 
-Full instructions: [docs.astronomer.io/cloud/deploy-code](https://docs.astronomer.io/cloud/deploy-code/)
